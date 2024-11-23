@@ -43,7 +43,6 @@ const TransactionForm = () => {
   const [addTransaction] = useMutation(ADD_TRANSACTION, {
     refetchQueries: [{ query: GET_TRANSACTIONS }],
   });
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -85,7 +84,7 @@ const TransactionForm = () => {
           <div className="modal-content">
             <h2>Create New Transaction</h2>
             <form onSubmit={handleSubmit}>
-              <div>
+              <div className="form-field">
                 <label>Amount:</label>
                 <input
                   type="number"
@@ -94,7 +93,7 @@ const TransactionForm = () => {
                   required
                 />
               </div>
-              <div>
+              <div className="form-field">
                 <label>Date (yyyy-MM-dd):</label>
                 <input
                   type="date"
@@ -103,14 +102,14 @@ const TransactionForm = () => {
                   required
                 />
               </div>
-              <div>
+              <div className="form-field">
                 <label>Type:</label>
                 <select value={type} onChange={(e) => setType(e.target.value)} required>
                   <option value="DEPOT">DEPOT</option>
                   <option value="RETRAIT">RETRAIT</option>
                 </select>
               </div>
-              <div>
+              <div className="form-field">
                 <label>Account ID:</label>
                 <input
                   type="number"
@@ -119,15 +118,18 @@ const TransactionForm = () => {
                   required
                 />
               </div>
-              <button className="submit-btn" type="submit">Save Transaction</button>
+              <div className="form-actions">
+                <button className="submit-btn" type="submit">Save Transaction</button>
+                <button className="close-btn" onClick={() => setIsModalOpen(false)}>Close</button>
+              </div>
             </form>
-            <button className="close-btn" onClick={() => setIsModalOpen(false)}>Close</button>
           </div>
         </div>
       )}
 
       {/* Modal and button styles */}
       <style jsx>{`
+        /* Modal Styling */
         .modal {
           position: fixed;
           top: 0;
@@ -140,48 +142,91 @@ const TransactionForm = () => {
           align-items: center;
         }
         .modal-content {
-          background-color: white;
+          background-color: #fff;
           padding: 20px;
           border-radius: 8px;
           width: 400px;
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          text-align: center;
         }
+        h2 {
+          font-size: 1.5rem;
+          color: #2980b9;
+          margin-bottom: 20px;
+        }
+
+        /* Form and Inputs */
+        .form-field {
+          margin-bottom: 15px;
+        }
+        label {
+          display: block;
+          font-weight: 600;
+          margin-bottom: 5px;
+        }
+        input[type="number"],
+        input[type="date"],
+        select {
+          padding: 12px;
+          font-size: 1rem;
+          border: 2px solid #bdc3c7;
+          border-radius: 6px;
+          width: 100%;
+          background-color: #ecf0f1;
+          transition: all 0.3s;
+        }
+        input[type="number"]:focus,
+        input[type="date"]:focus,
+        select:focus {
+          border-color: #3498db;
+          outline: none;
+          background-color: #eaf6fd;
+        }
+
+        /* Button Styles */
         button {
-          padding: 10px 15px;
+          padding: 12px 20px;
           border: none;
-          border-radius: 4px;
-          font-size: 14px;
+          border-radius: 6px;
+          font-size: 1rem;
+          font-weight: 600;
           cursor: pointer;
+          transition: all 0.3s;
+          width: 45%;
         }
+
         .close-btn {
-          background-color: #f44336;
+          background-color: #e74c3c;
           color: white;
-          margin-top: 10px;
+          margin-left: 10px;
         }
         .submit-btn {
-          background-color: #4CAF50;
+          background-color: #27ae60;
           color: white;
-          margin-top: 10px;
         }
+
+        /* Button Hover Effects */
+        button:hover {
+          opacity: 0.8;
+        }
+        .submit-btn:hover {
+          background-color: #2ecc71;
+        }
+        .close-btn:hover {
+          background-color: #c0392b;
+        }
+
+        /* Open Modal Button */
         .open-modal-btn {
-        margin : 15px ;
           background-color: #008CBA;
           color: white;
           padding: 10px 20px;
           border-radius: 4px;
           font-size: 16px;
-        }
-        button:hover {
-          opacity: 0.8;
+          margin-top: 15px;
         }
         .open-modal-btn:hover {
           background-color: #007bb5;
-        }
-        .submit-btn:hover {
-          background-color: #45a049;
-        }
-        .close-btn:hover {
-          background-color: #d32f2f;
         }
       `}</style>
     </div>

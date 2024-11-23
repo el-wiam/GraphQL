@@ -98,7 +98,7 @@ public class CompteControllerGraphQL {
     public List<Transaction> allTransactions() {
     return transactionRepository.findAll();  // Fetch all transactions
     }
-
+    
      @MutationMapping
     public Boolean deleteCompte(@Argument Long id) {
         if (compteRepository.existsById(id)) {
@@ -108,4 +108,5 @@ public class CompteControllerGraphQL {
             throw new RuntimeException(String.format("Compte %s invalide", id));
         }
     }
+    
 }

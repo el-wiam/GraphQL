@@ -8,7 +8,8 @@ import TransactionList from './TransactionList';
 function App() {
   return (
     <div>
-      <h1>Welcome to Taziry's Bank</h1>
+      <br/>
+      <h1>Welcome to Taziry's Bank</h1><br/>
       <SoldeStats />
       <TransactionForm />
       <CompteForm />
